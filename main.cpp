@@ -6,6 +6,7 @@
 #include <QDebug>
 #include <QTextCodec>
 #include <QList>
+#include <QFileInfo>
 
 int main(int argc, char *argv[])
 {
@@ -147,7 +148,7 @@ file.close();
     qDebug() << "File is open";
 QByteArray req;
     QTextStream in(&file);
-    in<<"[THIS IS TEST FOR \\BACKSLASH]";
+  //  in<<"[THIS IS TEST FOR \\BACKSLASH]";
       while (!in.atEnd())
       {
 
@@ -211,6 +212,14 @@ QByteArray req;
                settings.setValue("Back",PATH);
                settings.endGroup();
 
+               QFileInfo info1("C:\Qt5.6.0\Examples\Qt-5.6\qtandroidextras");
+               QString str =info1.absoluteFilePath();
+
+               qDebug()<<"info1.absoluteFilePath() "<<str.replace('/', '\\');
+
+               settings.beginGroup("PARAMS_2");
+               settings.setValue("Back",str);
+               settings.endGroup();
         }
 
 
