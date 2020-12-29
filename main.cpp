@@ -133,15 +133,27 @@ file.close();
     int res=0;
     QFile file(path);
 
+
+    QSettings settings("C:/1/file.ini",QSettings::IniFormat);
+   settings.setIniCodec( QTextCodec::codecForLocale() );
+
+   settings.beginGroup("PARAMS");
+   qDebug()<<"BackupPath"<<settings.value(PATH,"").toString();
+   settings.endGroup();
+
+
     if(file.open(QIODevice::ReadWrite | QIODevice::Text))
     {
     qDebug() << "File is open";
 QByteArray req;
     QTextStream in(&file);
+    in<<"[THIS IS TEST FOR \\BACKSLASH]";
       while (!in.atEnd())
       {
+
  //        QString line = in.readLine().replace('\\','/');
          QString line = in.readLine();
+
          if(line.contains("BackupPath"))
          {
          qDebug()<<line;
@@ -182,9 +194,13 @@ QByteArray req;
 
          res=1;
 
+
+
+
          }
 
       }
+      in<<PATH;
       file.close();
         if(res==1)
         {
