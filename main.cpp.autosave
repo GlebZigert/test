@@ -142,6 +142,7 @@ QByteArray req;
       {
  //        QString line = in.readLine().replace('\\','/');
          QString line = in.readLine();
+         
          if(line.contains("BackupPath"))
          {
          qDebug()<<line;
@@ -181,6 +182,9 @@ QByteArray req;
          qDebug()<<"PATH "<<PATH;
 
          res=1;
+         
+         
+         
 
          }
 
